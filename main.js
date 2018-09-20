@@ -34,7 +34,7 @@ app.get('/posts', (req, res) => {
 app.post('/posts', jsonParser, (req, res) => {
   if (req.body) {
     connection.query(`INSERT INTO posts (title, url) VALUES ('${req.body.title}','${req.body.url}');`, (error, result) => {
-      connection.query(`SELECT * FROM posts WHERE id=${result.insertId};`, (req, result) => {
+      connection.query(`SELECT * FROM posts WHERE id=${result.insertId};`, (err, result) => {
         res.status(200).json(result);
       });
     });
@@ -50,6 +50,21 @@ app.put('/posts/:id/upvote', jsonParser, (req, res) => {
     });
   });
 })
+
+app.put('/posts/:id/downvote', jsonParser, (req, res) => {
+  connection.query(`UPDATE posts SET score = score - 1 WHERE id=${req.params.id};`, (err, voteresult) => {
+    connection.query(`SELECT * FROM posts WHERE id=${req.params.id};`, (err, queryresult) => {
+      res.status(200).json(queryresult);
+    });
+  });
+});
+
+app.delete('/posts/:id', jsonParser, (req, res) => {
+  connection.query(`DELETE FROM posts WHERE id=${req.params.id};`, (err, voteresult) => {
+    res.status(404).json('Post is deleted');
+  });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on the PORT: ${PORT}`);
