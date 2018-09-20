@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const PORT = 8080;
 const mysql = require('mysql');
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -19,16 +21,28 @@ connection.connect((err) => {
   console.log('Connection established');
 });
 
-app.get('/post', (req, res) => {
+app.get('/posts', (req, res) => {
   connection.query(`SELECT * FROM posts`, (err, result) => {
-      if(err){
-        res.status(500).send('Database error')
-      }
-      res.json(result);
+    if (err) {
+      res.status(500).send('Database error')
     }
+    res.json(result);
+  }
   )
 });
 
-app.listen(PORT, ()=> {
+app.post('/posts', jsonParser, (req, res) => {
+  if (req.body) {
+    connection.query(`INSERT INTO posts (title, url) VALUES ('${req.body.title}','${req.body.url}');`, (error, result) => {
+      connection.query(`SELECT * FROM posts WHERE id=${result.insertId};`, (req, result) => {
+        res.json(result);
+      });
+    });
+  } else {
+    res.send('Please insert a title and a URL!');
+  }
+})
+
+app.listen(PORT, () => {
   console.log(`Server is running on the PORT: ${PORT}`);
 });
