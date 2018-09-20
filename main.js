@@ -35,12 +35,20 @@ app.post('/posts', jsonParser, (req, res) => {
   if (req.body) {
     connection.query(`INSERT INTO posts (title, url) VALUES ('${req.body.title}','${req.body.url}');`, (error, result) => {
       connection.query(`SELECT * FROM posts WHERE id=${result.insertId};`, (req, result) => {
-        res.json(result);
+        res.status(200).json(result);
       });
     });
   } else {
     res.send('Please insert a title and a URL!');
   }
+})
+
+app.put('/posts/:id/upvote', jsonParser, (req, res) => {
+  connection.query(`UPDATE posts SET score = score + 1 WHERE id=${req.params.id};`, (err, voteresult) => {
+    connection.query(`SELECT * FROM posts WHERE id=${req.params.id};`, (err, queryresult) => {
+      res.status(200).json(queryresult);
+    });
+  });
 })
 
 app.listen(PORT, () => {
