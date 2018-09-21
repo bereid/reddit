@@ -10,7 +10,7 @@ body {
   background-image: url("stadium.jpg");
   background-size: cover;
   background-position: center;
-  position: relative
+  position: relative;
 }
 
 h1 {
@@ -22,4 +22,26 @@ h1 {
   transform: translate(-50%, -50%) ;
   font-family: 'Tulpen One', cursive;
   font-size: 100px;
+}
+
+.container {
+  margin: auto auto;
+  max-width: 968px;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+}
+
+.main-content {
+  background: #e7d7cd;
+  height: 1300px;
+  width: 60%;
+  margin: 10px;
+} 
+
+.sidebar {
+  background: #ceae99;
+  height: 1300px;
+  width: 40%;
+  margin: 10px;
 }
