@@ -32,36 +32,60 @@ app.get('/posts', (req, res) => {
 });
 
 app.post('/posts', jsonParser, (req, res) => {
-  if (req.body) {
-    connection.query(`INSERT INTO posts (title, url) VALUES ('${req.body.title}','${req.body.url}');`, (error, result) => {
+  connection.query(`INSERT INTO posts (title, url) VALUES ('${req.body.title}','${req.body.url}');`, (error, result) => {
+    if (error) {
+      res.status(404).send('Please add correct title and value!')
+    } else {
       connection.query(`SELECT * FROM posts WHERE id=${result.insertId};`, (err, result) => {
-        res.status(200).json(result);
+        if (err) {
+          res.status(404).send('Query error');
+        } else {
+          res.status(200).json(result);
+        }
       });
-    });
-  } else {
-    res.send('Please insert a title and a URL!');
-  }
-})
+    }
+  });
+});
 
 app.put('/posts/:id/upvote', jsonParser, (req, res) => {
   connection.query(`UPDATE posts SET score = score + 1 WHERE id=${req.params.id};`, (err, voteresult) => {
-    connection.query(`SELECT * FROM posts WHERE id=${req.params.id};`, (err, queryresult) => {
-      res.status(200).json(queryresult);
-    });
+    if (err) {
+      res.status(404).send('Cannot find post')
+    } else {
+      connection.query(`SELECT * FROM posts WHERE id=${req.params.id};`, (err, queryresult) => {
+        if (err) {
+          res.status(404).send('Cannot find post')
+        } else {
+          res.status(200).json(queryresult);
+        }
+      });
+    }
   });
 })
 
 app.put('/posts/:id/downvote', jsonParser, (req, res) => {
   connection.query(`UPDATE posts SET score = score - 1 WHERE id=${req.params.id};`, (err, voteresult) => {
-    connection.query(`SELECT * FROM posts WHERE id=${req.params.id};`, (err, queryresult) => {
-      res.status(200).json(queryresult);
-    });
+    if (err) {
+      res.status(404).send('Cannot find post')
+    } else {
+      connection.query(`SELECT * FROM posts WHERE id=${req.params.id};`, (err, queryresult) => {
+        if (err) {
+          res.status(404).send('Cannot find post')
+        } else {
+          res.status(200).json(queryresult);
+        }
+      });
+    }
   });
-});
+})
 
 app.delete('/posts/:id', (req, res) => {
   connection.query(`DELETE FROM posts WHERE id=${req.params.id};`, (err, voteresult) => {
-    res.status(404).json('Post is deleted');
+    if (err) {
+      res.status(404).send('Cannot find post!')
+    } else {
+      res.status(404).json('Post is deleted');
+    }
   });
 });
 
@@ -70,10 +94,14 @@ app.put('/posts/:id', jsonParser, (req, res) => {
   let newURL = req.body.url;
   connection.query(`UPDATE posts SET title = '${newTitle}', url = '${newURL}' WHERE id=${req.params.id};`, (err, result) => {
     if (err) {
-      console.log(err.message);
+      res.status(404).send('Please insert a correct title and url!')
     } else {
       connection.query(`SELECT * FROM posts WHERE id=${req.params.id};`, (err, queryresult) => {
-        res.status(200).json(queryresult);
+        if (err) {
+          res.status(500).send('Database error!')
+        } else {
+          res.status(200).json(queryresult);
+        }
       });
     }
   });
