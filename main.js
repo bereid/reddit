@@ -6,6 +6,7 @@ const PORT = 8080;
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
+const path = require('path');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -19,6 +20,12 @@ connection.connect((err) => {
     return;
   }
   console.log('Connection established');
+});
+
+app.use('/assets', express.static('assets'));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/posts', (req, res) => {
