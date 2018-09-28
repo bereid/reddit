@@ -11,11 +11,11 @@ window.onload = () => {
       let newPostDiv = document.createElement('div');
       newPostDiv.classList.add('post');
       maincontent.appendChild(newPostDiv);
-      
+
       let voter = document.createElement('div');
       voter.classList.add('voter');
       newPostDiv.appendChild(voter);
-      
+
       let postContent = document.createElement('div');
       postContent.classList.add('postcontent');
       newPostDiv.appendChild(postContent);
@@ -40,11 +40,18 @@ window.onload = () => {
       postContent.appendChild(postLink);
 
       let submitDate = document.createElement('p');
-      submitDate.classList.add('submitdate')
-      submitDate.innerHTML = `Posted at: ${post.date}`;
+      submitDate.classList.add('submitdate');
+      let currentDate = new Date();
+      let currentDateInNumberTimeStamp = Date.parse(currentDate);
+      let postDateInNumberTimeStamp = Date.parse(post.date);
+      let elapsedTime = 
+      Math.floor((currentDateInNumberTimeStamp-postDateInNumberTimeStamp)/3600000);
+      submitDate.innerHTML = `submitted ${elapsedTime} hours ago`;
       postContent.appendChild(submitDate);
-
     });
+
+    
+
   }
-  http.send(); 
+  http.send();
 }
