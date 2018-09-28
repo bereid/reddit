@@ -33,6 +33,17 @@ window.onload = () => {
       downVoter.src = downVoteImg;
       voter.appendChild(downVoter);
 
+      let postLink = document.createElement('a');
+      postLink.classList.add('postlink')
+      postLink.href = post.url;
+      postLink.innerHTML = post.title;
+      postContent.appendChild(postLink);
+
+      let submitDate = document.createElement('p');
+      submitDate.classList.add('submitdate')
+      submitDate.innerHTML = `Posted at: ${post.date}`;
+      postContent.appendChild(submitDate);
+
     });
   }
   http.send(); 
