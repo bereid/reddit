@@ -70,6 +70,14 @@ h1 {
   line-height: 13px;
 }
 
+.upvote-button {
+  outline: 0;
+}
+
+.downvote-button {
+  outline: 0;
+}
+
 .postcontent {
   width: 80%;
   align-self: center;
