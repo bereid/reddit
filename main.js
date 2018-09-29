@@ -14,6 +14,8 @@ const connection = mysql.createConnection({
   database: 'reddit',
 });
 
+app.use(bodyParser.urlencoded( { extended : false } ));
+
 connection.connect((err) => {
   if (err) {
     console.log('Connection failed to database: ' + err);
@@ -43,15 +45,16 @@ app.get('/posts', (req, res) => {
 });
 
 app.post('/posts', jsonParser, (req, res) => {
-  connection.query(`INSERT INTO posts (title, url) VALUES ('${req.body.title}','${req.body.url}');`, (error, result) => {
+  console.log(req.body);
+  connection.query(`INSERT INTO posts (owner, title, url) VALUES ('${req.body.owner}','${req.body.title}','${req.body.url}');`, (error, result) => {
     if (error) {
-      res.status(404).send('Please add correct title and value!')
+      res.status(404).send(error)
     } else {
       connection.query(`SELECT * FROM posts WHERE id=${result.insertId};`, (err, result) => {
         if (err) {
           res.status(404).send('Query error');
         } else {
-          res.status(200).json(result);
+          res.redirect('/');
         }
       });
     }

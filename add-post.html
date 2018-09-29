@@ -6,7 +6,6 @@
   <title>Reddit/football is religion</title>
   <link rel="stylesheet" type="text/css" href="assets/style.css">
 </head>
-<script src="assets/script.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Audiowide|Lato:300|Tulpen+One" rel="stylesheet">
 </head>
 
@@ -14,24 +13,22 @@
   <div class="header">
     <h1>Football is religion</h1>
   </div>
-  <div class="wrapper">
-    <form action="/login" method="post">
-      <div>
-        <h2>Add new post</h2>
-      </div>
-      <div class="input-fields">
-        <label for="text">Post title:</label>
-        <input type="text" id="title" name="title" required minlength="6" maxlength="160" placeholder="Your post's title">
-      </div>
-      <div class="input-fields">
-        <label for="text">URL:</label>
-        <input type="text" id="url" name="url" required placeholder="Your post's URL">
-      </div>
-      <div>
-        <button class="submit-button" type="submit">Send new post</button>
-      </div>
+    <form action="http://localhost:8080/posts" method="POST" enctype="application/json">
+      <p class="formheader">SUBMIT NEW POST</p>
+      <label for="owner">Username</label>
+      <br>
+      <input type="text" id="owner" name="owner" required maxlength="30">
+      <br>
+      <label for="title">Post title</label>
+      <br>
+      <input type="text" id="title" name="title" required minlength="10" maxlength="160">
+      <br>
+      <label for="url">Url</label>
+      <br>
+      <input type="text" id="url" name="url" required maxlength="160">
+      <br>
+        <button type="submit">Send new post</button>
     </form>
-  </div>
 </body>
 
 </html>
