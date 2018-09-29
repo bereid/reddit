@@ -17,18 +17,18 @@
   <div class="wrapper">
     <form action="/login" method="post">
       <div>
-        <h2>Account Login</h2>
+        <h2>Add new post</h2>
       </div>
       <div class="input-fields">
-        <label for="username">USERNAME:</label>
-        <input type="text" id="username" name="user_name" required minlength="6" placeholder="User name">
+        <label for="text">Post title:</label>
+        <input type="text" id="title" name="title" required minlength="6" maxlength="160" placeholder="Your post's title">
       </div>
       <div class="input-fields">
-        <label for="password">PASSWORD:</label>
-        <input type="password" id="password" name="user_password" required placeholder="Password">
+        <label for="text">URL:</label>
+        <input type="text" id="url" name="url" required placeholder="Your post's URL">
       </div>
       <div>
-        <button class="submit-button" type="submit">Login</button>
+        <button class="submit-button" type="submit">Send new post</button>
       </div>
     </form>
   </div>
