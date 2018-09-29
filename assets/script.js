@@ -3,21 +3,19 @@ window.onload = () => {
   const maincontent = document.querySelector('.main-content');
   const submitButton = document.querySelector('.submit');
   const getPosts = new XMLHttpRequest();
-  const upvotePosts = new XMLHttpRequest();
-  const downvotePosts = new XMLHttpRequest();
   const downVoteImg = 'assets/downvote.png';
   const downVotedImg = 'assets/downvoted.png';
   const upVoteImg = 'assets/upvote.png';
   const upVotedImg = 'assets/upvoted.png';
   const upvote = (postid) => {
-    upvotePosts.open('PUT', `${host}/posts/${postid}/upvote`, true);
-    upvotePosts.onload = () => {};
-    upvotePosts.send();
+    getPosts.open('PUT', `${host}/posts/${postid}/upvote`, true);
+    getPosts.onload = () => {};
+    getPosts.send();
   }
   const downvote = (postid) => {
-    upvotePosts.open('PUT', `${host}/posts/${postid}/downvote`, true);
-    upvotePosts.onload = () => {};
-    upvotePosts.send();
+    getPosts.open('PUT', `${host}/posts/${postid}/downvote`, true);
+    getPosts.onload = () => {};
+    getPosts.send();
   }
 
   getPosts.open('GET', `${host}/posts`, true);
@@ -82,6 +80,19 @@ window.onload = () => {
         Math.floor((currentDateInNumberTimeStamp - postDateInNumberTimeStamp) / 3600000);
       submitDate.innerHTML = `submitted ${elapsedTime} hours ago by ${post.owner}`;
       postContent.appendChild(submitDate);
+
+      let modifyButton = document.createElement('a');
+      modifyButton.classList.add('modify');
+      modifyButton.href = 'http://juventus.com';
+      modifyButton.innerText = 'modify';
+      postContent.appendChild(modifyButton);
+
+      let deleteButton = document.createElement('a');
+      deleteButton.classList.add('delete');
+      deleteButton.href = 'http://juventus.com';
+      deleteButton.innerText = 'delete';
+      postContent.appendChild(deleteButton);
+
 
     });
 
