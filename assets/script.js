@@ -2,8 +2,9 @@ window.onload = () => {
   const host = 'http://localhost:8080'
   const maincontent = document.querySelector('.main-content');
   const http = new XMLHttpRequest();
-  const downVoteImg = 'assets/downvote.png'
-  const upVoteImg = 'assets/upvote.png'
+  const downVoteImg = 'assets/downvote.png';
+  const upVoteImg = 'assets/upvote.png';
+  const submitButton = document.querySelector('.submit');
   http.open('GET', `${host}/posts`, true);
   http.onload = () => {
     let postList = JSON.parse(http.response);
@@ -50,7 +51,9 @@ window.onload = () => {
       postContent.appendChild(submitDate);
     });
 
-    
+    submitButton.addEventListener('click', () => {
+      location.href=`${host}/add-post`;
+    });
 
   }
   http.send();

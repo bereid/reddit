@@ -28,6 +28,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/add-post', (req, res) => {
+  res.sendFile(path.join(__dirname, 'add-post.html'));
+});
+
 app.get('/posts', (req, res) => {
   connection.query(`SELECT * FROM posts`, (err, result) => {
     if (err) {
