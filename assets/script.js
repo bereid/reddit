@@ -11,14 +11,12 @@ window.onload = () => {
   const upVotedImg = 'assets/upvoted.png';
   const upvote = (postid) => {
     upvotePosts.open('PUT', `${host}/posts/${postid}/upvote`, true);
-    upvotePosts.onload = () => {
-    }
+    upvotePosts.onload = () => {};
     upvotePosts.send();
   }
   const downvote = (postid) => {
     upvotePosts.open('PUT', `${host}/posts/${postid}/downvote`, true);
-    upvotePosts.onload = () => {
-    }
+    upvotePosts.onload = () => {};
     upvotePosts.send();
   }
 

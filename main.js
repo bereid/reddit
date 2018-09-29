@@ -15,6 +15,7 @@ const connection = mysql.createConnection({
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/assets', express.static('assets'));
 
 connection.connect((err) => {
   if (err) {
@@ -23,8 +24,6 @@ connection.connect((err) => {
   }
   console.log('Connection established');
 });
-
-app.use('/assets', express.static('assets'));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
