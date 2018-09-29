@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
   database: 'reddit',
 });
 
-app.use(bodyParser.urlencoded( { extended : false } ));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 connection.connect((err) => {
   if (err) {
@@ -45,20 +45,35 @@ app.get('/posts', (req, res) => {
 });
 
 app.post('/posts', jsonParser, (req, res) => {
-  console.log(req.body);
-  connection.query(`INSERT INTO posts (owner, title, url) VALUES ('${req.body.owner}','${req.body.title}','${req.body.url}');`, (error, result) => {
-    if (error) {
-      res.status(404).send(error)
-    } else {
-      connection.query(`SELECT * FROM posts WHERE id=${result.insertId};`, (err, result) => {
-        if (err) {
-          res.status(404).send('Query error');
-        } else {
-          res.redirect('/');
-        }
-      });
-    }
-  });
+  if (req.body.owner) {
+    connection.query(`INSERT INTO posts (owner, title, url) VALUES ('${req.body.owner}','${req.body.title}','${req.body.url}');`, (error, result) => {
+      if (error) {
+        res.status(404).send(error)
+      } else {
+        connection.query(`SELECT * FROM posts WHERE id=${result.insertId};`, (err, result) => {
+          if (err) {
+            res.status(404).send('Query error');
+          } else {
+            res.redirect('/');
+          }
+        });
+      }
+    });
+  } else {
+    connection.query(`INSERT INTO posts (owner, title, url) VALUES ('anonymus','${req.body.title}','${req.body.url}');`, (error, result) => {
+      if (error) {
+        res.status(404).send(error)
+      } else {
+        connection.query(`SELECT * FROM posts WHERE id=${result.insertId};`, (err, result) => {
+          if (err) {
+            res.status(404).send('Query error');
+          } else {
+            res.redirect('/');
+          }
+        });
+      }
+    });
+  }
 });
 
 app.put('/posts/:id/upvote', jsonParser, (req, res) => {
