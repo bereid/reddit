@@ -18,6 +18,12 @@ window.onload = () => {
     getPosts.send();
   }
 
+  const deleting = (postid) => {
+    getPosts.open('DELETE', `${host}/posts/${postid}`, true);
+    getPosts.onload = () => {};
+    getPosts.send();
+  }
+
   getPosts.open('GET', `${host}/posts`, true);
   getPosts.onload = () => {
     let postList = JSON.parse(getPosts.response);
@@ -83,16 +89,19 @@ window.onload = () => {
 
       let modifyButton = document.createElement('a');
       modifyButton.classList.add('modify');
-      modifyButton.href = 'http://juventus.com';
+      modifyButton.href = '/';
       modifyButton.innerText = 'modify';
       postContent.appendChild(modifyButton);
 
       let deleteButton = document.createElement('a');
       deleteButton.classList.add('delete');
-      deleteButton.href = 'http://juventus.com';
+      deleteButton.href = `${host}/`;
       deleteButton.innerText = 'delete';
       postContent.appendChild(deleteButton);
 
+      deleteButton.addEventListener('click', () => {
+        deleting(post.id);
+      })
 
     });
 
