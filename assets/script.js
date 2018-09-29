@@ -47,8 +47,10 @@ window.onload = () => {
       let postDateInNumberTimeStamp = Date.parse(post.date);
       let elapsedTime = 
       Math.floor((currentDateInNumberTimeStamp-postDateInNumberTimeStamp)/3600000);
-      submitDate.innerHTML = `submitted ${elapsedTime} hours ago`;
+      submitDate.innerHTML = `submitted ${elapsedTime} hours ago by ${post.owner}`;
       postContent.appendChild(submitDate);
+
+
     });
 
     submitButton.addEventListener('click', () => {
