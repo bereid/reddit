@@ -89,7 +89,6 @@ window.onload = () => {
 
       let modifyButton = document.createElement('a');
       modifyButton.classList.add('modify');
-      modifyButton.href = '/';
       modifyButton.innerText = 'modify';
       postContent.appendChild(modifyButton);
 
