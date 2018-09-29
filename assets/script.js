@@ -21,8 +21,10 @@ window.onload = () => {
       postContent.classList.add('postcontent');
       newPostDiv.appendChild(postContent);
 
-      let upVoter = document.createElement('img');
+      let upVoter = document.createElement('input');
+      upVoter.type = 'image';
       upVoter.src = upVoteImg;
+      upVoter.alt = 'submit'
       voter.appendChild(upVoter);
 
       let voteNumber = document.createElement('p');
@@ -30,8 +32,10 @@ window.onload = () => {
       voteNumber.innerText = post.score;
       voter.appendChild(voteNumber);
 
-      let downVoter = document.createElement('img');
+      let downVoter = document.createElement('input');
+      downVoter.type = 'image';
       downVoter.src = downVoteImg;
+      downVoter.alt = 'submit';
       voter.appendChild(downVoter);
 
       let postLink = document.createElement('a');
@@ -49,7 +53,6 @@ window.onload = () => {
       Math.floor((currentDateInNumberTimeStamp-postDateInNumberTimeStamp)/3600000);
       submitDate.innerHTML = `submitted ${elapsedTime} hours ago by ${post.owner}`;
       postContent.appendChild(submitDate);
-
 
     });
 

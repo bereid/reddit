@@ -15,17 +15,17 @@
   </div>
     <form action="http://localhost:8080/posts" method="POST" enctype="application/json">
       <p class="formheader">SUBMIT NEW POST</p>
-      <label for="owner">Username</label>
+      <label for="owner">Username (not required)</label>
       <br>
-      <input type="text" id="owner" name="owner" maxlength="30">
+      <input class="input" type="text" id="owner" name="owner" maxlength="30">
       <br>
       <label for="title">Post title</label>
       <br>
-      <input type="text" id="title" name="title" required minlength="10" maxlength="160">
+      <input class="input" type="text" id="title" name="title" required minlength="10" maxlength="160">
       <br>
       <label for="url">Url</label>
       <br>
-      <input type="text" id="url" name="url" required maxlength="160">
+      <input class="input" type="text" id="url" name="url" required maxlength="160">
       <br>
         <button class="sendpost" type="submit">Send new post</button>
     </form>

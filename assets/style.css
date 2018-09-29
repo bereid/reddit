@@ -135,18 +135,18 @@ form {
   border-radius: 15px;
 }
 
-input {
+.input {
   height: 30px;
   width: 280px;
   margin-top: 3px;
   margin-bottom: 6px;
 }
 
-input:focus {
+.input:focus {
   outline: 1px solid #B4D455;
 }
 
-input:valid {
+.input:valid {
   background: rgba(186,218,85, 0.3);
 }
 
