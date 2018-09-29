@@ -127,8 +127,9 @@ h1 {
 }
 
 form {
+  margin: 10px auto;
   background: white;
-  width: 400px;
+  width: 300px;
   padding: 50px;
   padding-top: 25px;
   border-radius: 15px;
@@ -136,13 +137,9 @@ form {
 
 input {
   height: 30px;
-  width: 380px;
-}
-
-.input-fields {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 30px;
+  width: 280px;
+  margin-top: 3px;
+  margin-bottom: 6px;
 }
 
 input:focus {
@@ -157,13 +154,14 @@ label {
   line-height: 30px;
 }
 
-.submit-button {
+.sendpost {
+  margin-top: 10px;
   background: #1a1a1a;
   color: white;
   width: 200px;
-  height: 50px;
-  border-radius: 6px;
-  font-size: 18px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 15px;
 }
 
 @media screen and (max-width: 600px) {
