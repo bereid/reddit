@@ -33,15 +33,27 @@ app.get('/add-post', (req, res) => {
   res.sendFile(path.join(__dirname, 'add-post.html'));
 });
 
+// app.get('/modify-post/:id', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'add-post.html/?id=10'));
+// });
+
 app.get('/posts', (req, res) => {
   connection.query(`SELECT * FROM posts`, (err, result) => {
     if (err) {
       res.status(500).send('Database error')
     }
     res.json(result);
-  }
-  )
+  });
 });
+
+// app.get('/posts/:id', (req, res) => {
+//   connection.query(`SELECT * FROM posts WHERE id=${req.params.id};`, (err, result) => {
+//     if (err) {
+//       res.status(404).send('Cannot get post on this ID');
+//     }
+//     res.json(result[0]);
+//   });
+// });
 
 app.post('/posts', jsonParser, (req, res) => {
   if (req.body.owner) {
@@ -117,7 +129,7 @@ app.delete('/posts/:id', (req, res) => {
   });
 });
 
-app.put('/posts/:id', jsonParser, (req, res) => {
+app.post('/posts/:id', jsonParser, (req, res) => {
   let newTitle = req.body.title;
   let newURL = req.body.url;
   connection.query(`UPDATE posts SET title = '${newTitle}', url = '${newURL}' WHERE id=${req.params.id};`, (err, result) => {

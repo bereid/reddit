@@ -1,0 +1,31 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reddit/football is religion</title>
+  <link rel="stylesheet" type="text/css" href="/assets/style.css">
+  <script src="/assets/modify-post-script.js"></script>
+</head>
+<link href="https://fonts.googleapis.com/css?family=Audiowide|Lato:300|Tulpen+One" rel="stylesheet">
+</head>
+
+<body>
+  <div class="header">
+    <h1>Football is religion</h1>
+  </div>
+    <form action="http://localhost:8080/posts/id" method="POST" enctype="application/json">
+      <p class="formheader">MODIFY POST</p>
+      <label for="title">Post title</label>
+      <br>
+      <input class="input" type="text" id="title" name="title" required minlength="10" maxlength="160">
+      <br>
+      <label for="url">Url</label>
+      <br>
+      <input class="input" type="text" id="url" name="url" required maxlength="160">
+      <br>
+        <button class="sendpost" type="submit">Modify post</button>
+        <div class="valami"></div>
+    </form>
+</body>
+
+</html>

@@ -92,6 +92,10 @@ window.onload = () => {
       modifyButton.innerText = 'modify';
       postContent.appendChild(modifyButton);
 
+      modifyButton.addEventListener('click', () => {
+        location.href = `${host}/modify-post/${post.id}`;
+      });
+
       let deleteButton = document.createElement('a');
       deleteButton.classList.add('delete');
       deleteButton.href = `${host}/`;
@@ -100,7 +104,7 @@ window.onload = () => {
 
       deleteButton.addEventListener('click', () => {
         deleting(post.id);
-      })
+      });
 
     });
 
