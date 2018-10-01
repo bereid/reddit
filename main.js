@@ -33,10 +33,6 @@ app.get('/add-post', (req, res) => {
   res.sendFile(path.join(__dirname, 'add-post.html'));
 });
 
-// app.get('/modify-post/:id', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'add-post.html/?id=10'));
-// });
-
 app.get('/posts', (req, res) => {
   connection.query(`SELECT * FROM posts`, (err, result) => {
     if (err) {
@@ -45,15 +41,6 @@ app.get('/posts', (req, res) => {
     res.json(result);
   });
 });
-
-// app.get('/posts/:id', (req, res) => {
-//   connection.query(`SELECT * FROM posts WHERE id=${req.params.id};`, (err, result) => {
-//     if (err) {
-//       res.status(404).send('Cannot get post on this ID');
-//     }
-//     res.json(result[0]);
-//   });
-// });
 
 app.post('/posts', jsonParser, (req, res) => {
   if (req.body.owner) {
@@ -96,7 +83,7 @@ app.put('/posts/:id/upvote', jsonParser, (req, res) => {
         if (err) {
           res.status(404).send('Cannot find post')
         } else {
-          res.status(200).json(queryresult);
+          res.sendFile(path.join(__dirname, 'index.html'));
         }
       });
     }
@@ -127,6 +114,10 @@ app.delete('/posts/:id', (req, res) => {
       res.status(404).json('Post is deleted');
     }
   });
+});
+
+app.get('/modify-post/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, 'modify-post.html'));
 });
 
 app.post('/posts/:id', jsonParser, (req, res) => {

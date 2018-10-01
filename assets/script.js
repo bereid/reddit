@@ -93,6 +93,9 @@ window.onload = () => {
       postContent.appendChild(modifyButton);
 
       modifyButton.addEventListener('click', () => {
+        localStorage.setItem('currentId', post.id);
+        localStorage.setItem('currentTitle', post.title);
+        localStorage.setItem('currentUrl', post.url);
         location.href = `${host}/modify-post/${post.id}`;
       });
 
