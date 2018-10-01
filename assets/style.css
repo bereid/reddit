@@ -92,6 +92,10 @@ h1 {
   text-decoration: none;
 }
 
+.postlink:hover {
+  color: rgb(186,220,167);
+}
+
 .submitdate {
   line-height: 30px;
   font-size: 13px;
@@ -104,6 +108,10 @@ h1 {
   padding-right: 5px;
   font-size: 13px;
   color: black;
+}
+
+.fa-edit {
+  font-size: 16;
 }
 
 .delete {
@@ -200,4 +208,3 @@ label {
     width: 100%;
   }
 }
-

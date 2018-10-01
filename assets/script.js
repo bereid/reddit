@@ -89,7 +89,7 @@ window.onload = () => {
 
       let modifyButton = document.createElement('a');
       modifyButton.classList.add('modify');
-      modifyButton.innerText = 'modify';
+      modifyButton.innerHTML = 'modify <i class="far fa-edit"></i>';
       postContent.appendChild(modifyButton);
 
       modifyButton.addEventListener('click', () => {
