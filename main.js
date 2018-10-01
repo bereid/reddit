@@ -88,7 +88,7 @@ app.put('/posts/:id/upvote', jsonParser, (req, res) => {
       });
     }
   });
-})
+});
 
 app.put('/posts/:id/downvote', jsonParser, (req, res) => {
   connection.query(`UPDATE posts SET score = score - 1 WHERE id=${req.params.id};`, (err, voteresult) => {
@@ -104,7 +104,7 @@ app.put('/posts/:id/downvote', jsonParser, (req, res) => {
       });
     }
   });
-})
+});
 
 app.delete('/posts/:id', (req, res) => {
   connection.query(`DELETE FROM posts WHERE id=${req.params.id};`, (err, voteresult) => {
